@@ -12,12 +12,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientProvider;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientProviderBuilder;
+import org.springframework.security.oauth2.client.oidc.web.logout.OidcClientInitiatedLogoutSuccessHandler;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 
 import com.malgn.configure.properties.AppProperties;
@@ -63,7 +65,7 @@ public class OAuth2ClientConfiguration {
                 .logoutRequestMatcher(
                     PathPatternRequestMatcher.withDefaults()
                         .matcher("/logout"))
-                .logoutSuccessUrl(properties.logoutSuccessUrl())
+                .logoutSuccessHandler(oidcLogoutSuccessHandler())
                 .invalidateHttpSession(true)
                 .clearAuthentication(true));
 
@@ -95,11 +97,13 @@ public class OAuth2ClientConfiguration {
         return (request, response, authentication) -> response.sendRedirect(properties.loginSuccessUrl());
     }
 
-    @Bean
-    public LogoutHandler logoutHandler() {
-        return (request, response, authentication) -> {
-            authorizedClientRepository.removeAuthorizedClient("keyflow-auth", authentication, request, response);
-        };
+    private LogoutSuccessHandler oidcLogoutSuccessHandler() {
+        OidcClientInitiatedLogoutSuccessHandler oidcLogoutSuccessHandler =
+            new OidcClientInitiatedLogoutSuccessHandler(clientRegistrationRepository);
+
+        oidcLogoutSuccessHandler.setPostLogoutRedirectUri(properties.loginSuccessUrl());
+
+        return oidcLogoutSuccessHandler;
     }
 
 }
