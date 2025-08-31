@@ -2,6 +2,7 @@ package com.malgn.adapter.integration.feign.users;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.malgn.application.users.model.UserResult;
 
@@ -9,6 +10,6 @@ import com.malgn.application.users.model.UserResult;
 public interface UserFeignClient {
 
     @GetMapping(path = "{id}")
-    UserResult getUser(String id);
+    UserResult getUser(@PathVariable String id);
 
 }
