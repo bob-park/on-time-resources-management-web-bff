@@ -42,7 +42,6 @@ dependencies {
     implementation "com.malgn:malgn-spring-boot-starter:${malgnStarterVersion}"
 
     // spring boot
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -53,7 +52,7 @@ dependencies {
     // spring security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
     // spring cloud bootstrap
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
@@ -62,20 +61,11 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
 
-    // jdbc
-    implementation 'org.postgresql:postgresql:42.7.3'
-
-    // p6spy
-    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.2'
 
     // lombok
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
-    // querydsl
-    implementation("io.github.openfeign.querydsl:querydsl-jpa:${queryDslVersion}")
-    annotationProcessor("io.github.openfeign.querydsl:querydsl-apt:${queryDslVersion}:jakarta")
-    testAnnotationProcessor("io.github.openfeign.querydsl:querydsl-apt:${queryDslVersion}:jakarta")
 }
 
 
