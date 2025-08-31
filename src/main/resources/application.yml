@@ -54,7 +54,9 @@ spring:
         config:
           default:
             logger-level: basic
-
+  threads:
+    virtual:
+      enabled: on
 
 ## eureka
 eureka:
