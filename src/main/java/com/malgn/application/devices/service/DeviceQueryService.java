@@ -16,7 +16,6 @@ import com.malgn.application.devices.model.DeviceDashboardResult;
 import com.malgn.application.devices.model.DeviceResult;
 import com.malgn.application.devices.model.DeviceSearchRequest;
 import com.malgn.application.devices.model.DeviceStatusResult;
-import com.malgn.application.devices.model.DeviceType;
 import com.malgn.application.devices.provided.DeviceFinder;
 import com.malgn.application.devices.required.DeviceClient;
 
