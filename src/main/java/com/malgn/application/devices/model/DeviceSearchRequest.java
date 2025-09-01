@@ -15,15 +15,15 @@ public class DeviceSearchRequest {
     private String name;
     private String description;
     private String teamId;
-    private String deviceType;
-    private String status;
+    private DeviceType deviceType;
+    private DeviceStatus status;
     private String model;
     private String manufacturer;
     private String serialNumber;
 
     @Builder(toBuilder = true)
-    private DeviceSearchRequest(String name, String description, String teamId, String deviceType, String status,
-        String model, String manufacturer, String serialNumber) {
+    private DeviceSearchRequest(String name, String description, String teamId, DeviceType deviceType,
+        DeviceStatus status, String model, String manufacturer, String serialNumber) {
         this.name = name;
         this.description = description;
         this.teamId = teamId;
