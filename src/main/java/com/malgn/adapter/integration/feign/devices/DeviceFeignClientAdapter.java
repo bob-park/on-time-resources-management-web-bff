@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import com.malgn.application.devices.model.DeviceRegisterRequest;
 import com.malgn.application.devices.model.DeviceResult;
 import com.malgn.application.devices.model.DeviceSearchRequest;
 import com.malgn.application.devices.required.DeviceClient;
@@ -19,5 +20,10 @@ public class DeviceFeignClientAdapter implements DeviceClient {
     @Override
     public Page<DeviceResult> getDevices(DeviceSearchRequest searchRequest, Pageable pageable) {
         return deviceClient.getDevices(searchRequest, pageable).toPage();
+    }
+
+    @Override
+    public DeviceResult registerDevice(DeviceRegisterRequest registerRequest) {
+        return deviceClient.registerDevice(registerRequest);
     }
 }

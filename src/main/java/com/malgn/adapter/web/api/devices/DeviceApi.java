@@ -8,14 +8,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.malgn.adapter.web.api.devices.dto.DeviceResponse;
 import com.malgn.application.devices.model.DeviceDashboardResult;
+import com.malgn.application.devices.model.DeviceRegisterRequest;
 import com.malgn.application.devices.model.DeviceResult;
 import com.malgn.application.devices.model.DeviceSearchRequest;
 import com.malgn.application.devices.provided.DeviceFinder;
+import com.malgn.application.devices.provided.DeviceRegister;
 import com.malgn.application.users.model.UserResult;
 import com.malgn.application.users.required.UserClient;
 
@@ -26,6 +30,8 @@ public class DeviceApi {
 
     private final UserClient userClient;
     private final DeviceFinder deviceFinder;
+
+    private final DeviceRegister deviceRegister;
 
     @GetMapping(path = "")
     public Page<DeviceResponse> getDevices(DeviceSearchRequest searchRequest, Pageable pageable) {
@@ -50,4 +56,10 @@ public class DeviceApi {
         return deviceFinder.getDashboard();
     }
 
+    @PostMapping(path = "")
+    public DeviceResponse register(@RequestBody DeviceRegisterRequest registerRequest) {
+        DeviceResult result = deviceRegister.register(registerRequest);
+
+        return DeviceResponse.from(result, null);
+    }
 }
