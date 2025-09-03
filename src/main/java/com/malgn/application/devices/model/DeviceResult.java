@@ -3,6 +3,8 @@ package com.malgn.application.devices.model;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import com.malgn.application.users.model.UserDeviceResult;
+
 public record DeviceResult(String id,
                            String teamId,
                            DeviceType deviceType,
@@ -19,6 +21,7 @@ public record DeviceResult(String id,
                            DeviceStatus status,
                            LocalDateTime purchaseDate,
                            String ipAddress,
+                           UserDeviceResult user,
                            Map<String, Object> options,
                            LocalDateTime createdDate,
                            String createdBy,
