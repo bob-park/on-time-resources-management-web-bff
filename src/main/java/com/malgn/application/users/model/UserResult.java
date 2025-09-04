@@ -2,8 +2,11 @@ package com.malgn.application.users.model;
 
 import java.time.LocalDateTime;
 
+import lombok.Builder;
+
 import com.malgn.auth.model.RoleResponse;
 
+@Builder(toBuilder = true)
 public record UserResult(String id,
                          String userId,
                          String username,

@@ -11,6 +11,6 @@ public interface DeviceClient {
 
     Page<DeviceResult> getDevices(DeviceSearchRequest searchRequest, Pageable pageable);
 
-
     DeviceResult registerDevice(DeviceRegisterRequest registerRequest);
+
 }

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.collect.Lists;
+
 import com.malgn.adapter.web.api.devices.dto.DeviceResponse;
 import com.malgn.application.devices.model.DeviceDashboardResult;
 import com.malgn.application.devices.model.DeviceRegisterRequest;
@@ -37,7 +39,7 @@ public class DeviceApi {
     public Page<DeviceResponse> getDevices(DeviceSearchRequest searchRequest, Pageable pageable) {
         Page<DeviceResult> result = deviceFinder.getDevices(searchRequest, pageable);
 
-        List<UserResult> users = userClient.getUsers(PageRequest.of(0, 100)).getContent();
+        List<UserResult> users = Lists.newArrayList();
 
         return result.map(
             item ->
@@ -46,7 +48,17 @@ public class DeviceApi {
                     users.stream()
                         .filter(user -> item.user() != null && user.id().equals(item.user().userId()))
                         .findAny()
-                        .orElse(null))
+                        .orElseGet(() -> {
+                            if (item.user() == null) {
+                                return null;
+                            }
+
+                            UserResult user = userClient.getUser(item.user().userId());
+
+                            users.add(user);
+
+                            return user;
+                        }))
         );
 
     }
