@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.malgn.application.devices.model.DeviceRegisterRequest;
 import com.malgn.application.devices.model.DeviceResult;
 import com.malgn.application.devices.model.DeviceSearchRequest;
+import com.malgn.application.devices.model.DeviceUpdateRequest;
 import com.malgn.application.devices.required.DeviceClient;
 
 @RequiredArgsConstructor
@@ -25,5 +26,10 @@ public class DeviceFeignClientAdapter implements DeviceClient {
     @Override
     public DeviceResult registerDevice(DeviceRegisterRequest registerRequest) {
         return deviceClient.registerDevice(registerRequest);
+    }
+
+    @Override
+    public DeviceResult updateDevice(String id, DeviceUpdateRequest updateRequest) {
+        return deviceClient.updateDevice(id, updateRequest);
     }
 }

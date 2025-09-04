@@ -1,5 +1,7 @@
 package com.malgn.adapter.web.api.devices;
 
+import static com.malgn.adapter.web.api.devices.dto.DeviceResponse.*;
+
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
@@ -8,7 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +24,7 @@ import com.malgn.application.devices.model.DeviceDashboardResult;
 import com.malgn.application.devices.model.DeviceRegisterRequest;
 import com.malgn.application.devices.model.DeviceResult;
 import com.malgn.application.devices.model.DeviceSearchRequest;
+import com.malgn.application.devices.model.DeviceUpdateRequest;
 import com.malgn.application.devices.provided.DeviceFinder;
 import com.malgn.application.devices.provided.DeviceRegister;
 import com.malgn.application.users.model.UserResult;
@@ -43,7 +48,7 @@ public class DeviceApi {
 
         return result.map(
             item ->
-                DeviceResponse.from(
+                from(
                     item,
                     users.stream()
                         .filter(user -> item.user() != null && user.id().equals(item.user().userId()))
@@ -72,6 +77,14 @@ public class DeviceApi {
     public DeviceResponse register(@RequestBody DeviceRegisterRequest registerRequest) {
         DeviceResult result = deviceRegister.register(registerRequest);
 
-        return DeviceResponse.from(result, null);
+        return from(result, null);
+    }
+
+    @PutMapping(path = "{id}")
+    public DeviceResponse update(@PathVariable String id, @RequestBody DeviceUpdateRequest updateRequest) {
+
+        DeviceResult result = deviceRegister.update(id, updateRequest);
+
+        return from(result, null);
     }
 }

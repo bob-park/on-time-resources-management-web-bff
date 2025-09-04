@@ -4,12 +4,15 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.malgn.application.devices.model.DeviceRegisterRequest;
 import com.malgn.application.devices.model.DeviceResult;
 import com.malgn.application.devices.model.DeviceSearchRequest;
+import com.malgn.application.devices.model.DeviceUpdateRequest;
 import com.malgn.common.model.SimplePageImpl;
 
 @FeignClient(name = "on-time-resources-management-api", contextId="on-time-resources-management-api-devices", path = "api/v1/devices")
@@ -20,4 +23,7 @@ public interface DeviceFeignClient {
 
     @PostMapping(path = "")
     DeviceResult registerDevice(@RequestBody DeviceRegisterRequest registerRequest);
+
+    @PutMapping(path = "{id}")
+    DeviceResult updateDevice(@PathVariable String id, @RequestBody DeviceUpdateRequest updateRequest);
 }

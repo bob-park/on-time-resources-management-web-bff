@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.malgn.application.devices.model.DeviceRegisterRequest;
 import com.malgn.application.devices.model.DeviceResult;
+import com.malgn.application.devices.model.DeviceUpdateRequest;
 import com.malgn.application.devices.provided.DeviceRegister;
 import com.malgn.application.devices.required.DeviceClient;
 
@@ -20,5 +21,10 @@ public class DeviceCommandService implements DeviceRegister {
     @Override
     public DeviceResult register(DeviceRegisterRequest request) {
         return deviceClient.registerDevice(request);
+    }
+
+    @Override
+    public DeviceResult update(String id, DeviceUpdateRequest updateRequest) {
+        return deviceClient.updateDevice(id, updateRequest);
     }
 }
