@@ -20,10 +20,11 @@ public class DeviceSearchRequest {
     private String model;
     private String manufacturer;
     private String serialNumber;
+    private String userId;
 
     @Builder(toBuilder = true)
     private DeviceSearchRequest(String name, String description, String teamId, DeviceType deviceType,
-        DeviceStatus status, String model, String manufacturer, String serialNumber) {
+        DeviceStatus status, String model, String manufacturer, String serialNumber, String userId) {
         this.name = name;
         this.description = description;
         this.teamId = teamId;
@@ -32,5 +33,6 @@ public class DeviceSearchRequest {
         this.model = model;
         this.manufacturer = manufacturer;
         this.serialNumber = serialNumber;
+        this.userId = userId;
     }
 }
