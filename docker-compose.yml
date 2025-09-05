@@ -1,0 +1,10 @@
+services:
+  resources-management-web-bff:
+    container_name: resources-management-web-bff
+    image: ghcr.io/bob-park/on-time-resources-management-web-bff
+    build:
+      dockerfile: ./Dockerfile
+      x-bake:
+        platforms:
+          - linux/amd64
+          - linux/arm64
