@@ -19,6 +19,11 @@ public class DeviceFeignClientAdapter implements DeviceClient {
     private final DeviceFeignClient deviceClient;
 
     @Override
+    public DeviceResult getDevice(String id) {
+        return deviceClient.getDevice(id);
+    }
+
+    @Override
     public Page<DeviceResult> getDevices(DeviceSearchRequest searchRequest, Pageable pageable) {
         return deviceClient.getDevices(searchRequest, pageable).toPage();
     }

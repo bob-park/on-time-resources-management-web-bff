@@ -13,4 +13,6 @@ public interface DeviceFinder {
 
     Page<DeviceResult> getDevices(DeviceSearchRequest searchRequest, Pageable pageable);
 
+    DeviceResult getDevice(String id);
+
 }

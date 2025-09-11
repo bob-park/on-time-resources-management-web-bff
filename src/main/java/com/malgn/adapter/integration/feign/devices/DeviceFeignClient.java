@@ -24,6 +24,11 @@ public interface DeviceFeignClient {
     @PostMapping(path = "")
     DeviceResult registerDevice(@RequestBody DeviceRegisterRequest registerRequest);
 
+    @GetMapping(path = "{id}")
+    DeviceResult getDevice(@PathVariable String id);
+
     @PutMapping(path = "{id}")
     DeviceResult updateDevice(@PathVariable String id, @RequestBody DeviceUpdateRequest updateRequest);
+
+
 }

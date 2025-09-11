@@ -53,6 +53,11 @@ public class DeviceQueryService implements DeviceFinder {
         return deviceClient.getDevices(searchRequest, pageable);
     }
 
+    @Override
+    public DeviceResult getDevice(String id) {
+        return deviceClient.getDevice(id);
+    }
+
     private DeviceStatusResult getStatusResult() {
         Pageable page = PageRequest.of(0, 1);
 

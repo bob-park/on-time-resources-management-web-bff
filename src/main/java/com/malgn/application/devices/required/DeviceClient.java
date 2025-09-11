@@ -10,6 +10,9 @@ import com.malgn.application.devices.model.DeviceUpdateRequest;
 
 public interface DeviceClient {
 
+
+    DeviceResult getDevice(String id);
+
     Page<DeviceResult> getDevices(DeviceSearchRequest searchRequest, Pageable pageable);
 
     DeviceResult registerDevice(DeviceRegisterRequest registerRequest);

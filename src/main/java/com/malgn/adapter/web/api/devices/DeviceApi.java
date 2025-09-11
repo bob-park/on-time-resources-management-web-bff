@@ -80,6 +80,15 @@ public class DeviceApi {
         return from(result, null);
     }
 
+    @GetMapping(path = "{id}")
+    public DeviceResponse get(@PathVariable String id) {
+        DeviceResult result = deviceFinder.getDevice(id);
+
+        UserResult user = userClient.getUser(result.user().userId());
+
+        return from(result, user);
+    }
+
     @PutMapping(path = "{id}")
     public DeviceResponse update(@PathVariable String id, @RequestBody DeviceUpdateRequest updateRequest) {
 
