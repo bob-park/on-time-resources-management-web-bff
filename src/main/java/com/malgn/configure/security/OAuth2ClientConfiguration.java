@@ -18,7 +18,6 @@ import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizedCli
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 
@@ -36,7 +35,7 @@ public class OAuth2ClientConfiguration {
     private final OAuth2AuthorizedClientRepository authorizedClientRepository;
 
     @Bean
-    public SecurityFilterChain oauth2SecurityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain oauth2SecurityFilterChain(HttpSecurity http) {
         http.authorizeHttpRequests(
             requests ->
                 requests.anyRequest().authenticated());
